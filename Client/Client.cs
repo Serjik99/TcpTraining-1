@@ -14,6 +14,8 @@ namespace ClientClassNamespace
         private Thread _listeningThread;
         private bool _isLisening;
 
+        private TcpClient _client;
+
         public ClientClass(string serverAdress,int port)
         {
             _serverAddress = serverAdress;
@@ -22,8 +24,8 @@ namespace ClientClassNamespace
         public void Connect()
         { 
               
-                TcpClient client = new TcpClient(_serverAddress, _port);
-                _stream = client.GetStream();
+                _client = new TcpClient(_serverAddress, _port);
+                _stream = _client.GetStream();
                 
                 StartListening();
         }
@@ -59,6 +61,15 @@ namespace ClientClassNamespace
         private void StopListen()
         {
             _isLisening = false;
+        }
+
+        public void Disconect()
+        {
+            StopListen();
+            _listeningThread.Abort();
+            _stream.Close();
+            _client.Close();
+            
         }
     }
 }

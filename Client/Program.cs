@@ -18,6 +18,8 @@ namespace Client
             client.Connect(); 
            
             client.SendMessage("Message to server");
+
+            client.Disconect();
         }
         //Functions:
         //Connect() v
