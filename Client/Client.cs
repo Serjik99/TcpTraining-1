@@ -11,7 +11,7 @@ namespace ClientClassNamespace
         private readonly string _serverAddress;
         private readonly int _port;
         private NetworkStream _stream;
-        private readonly Thread _listeningThread;
+        private Thread _listeningThread;
 
         public ClientClass(string serverAdress,int port)
         {
@@ -31,11 +31,17 @@ namespace ClientClassNamespace
                 _stream.Write(data, 0, data.Length);
         }
 
+        public event Action<string> OnMessageReceived;
+
         private void StartListening()
         {
             _listeningThread = new Thread(() => 
             {
-                
+                byte[] data = new byte[256];
+                Int32 bytes = _stream.Read(data, 0, data.Length);
+                // event
+                string message = System.Text.Encoding.ASCII.GetString(data);
+                OnMessageReceived?.Invoke(message);
             });
         }
     }
