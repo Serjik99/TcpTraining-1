@@ -23,6 +23,7 @@ namespace ClientClassNamespace
               
                 TcpClient client = new TcpClient(_serverAddress, _port);
                 _stream = client.GetStream();
+                StartListening();
         }
 
         public void SendMessage(string message)
@@ -37,11 +38,16 @@ namespace ClientClassNamespace
         {
             _listeningThread = new Thread(() => 
             {
-                byte[] data = new byte[256];
-                Int32 bytes = _stream.Read(data, 0, data.Length);
-                // event
-                string message = System.Text.Encoding.ASCII.GetString(data);
-                OnMessageReceived?.Invoke(message);
+                // todo fix infinity loop
+                while(true)
+                {
+                    byte[] data = new byte[256];
+                    Int32 bytes = _stream.Read(data, 0, data.Length);
+                    // event
+                    string message = System.Text.Encoding.ASCII.GetString(data);
+                    OnMessageReceived?.Invoke(message);
+                }
+                
             });
         }
     }
