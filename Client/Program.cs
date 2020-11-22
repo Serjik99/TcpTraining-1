@@ -15,8 +15,8 @@ namespace Client
             client.SendMessage("Message to server");
         }
         //Functions:
-        //Connect()
-        //SendMessage()
+        //Connect() v
+        //SendMessage() v
         //StartLisening()
         // +OnMessageRecived
         //StopListening()
