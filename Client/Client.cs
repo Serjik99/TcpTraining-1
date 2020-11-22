@@ -12,6 +12,7 @@ namespace ClientClassNamespace
         private readonly int _port;
         private NetworkStream _stream;
         private Thread _listeningThread;
+        private bool _isLisening;
 
         public ClientClass(string serverAdress,int port)
         {
@@ -23,6 +24,7 @@ namespace ClientClassNamespace
               
                 TcpClient client = new TcpClient(_serverAddress, _port);
                 _stream = client.GetStream();
+                
                 StartListening();
         }
 
@@ -36,10 +38,12 @@ namespace ClientClassNamespace
 
         private void StartListening()
         {
+            _isLisening = true;
+
             _listeningThread = new Thread(() => 
             {
                 // todo fix infinity loop
-                while(true)
+                while(_isLisening)
                 {
                     byte[] data = new byte[256];
                     Int32 bytes = _stream.Read(data, 0, data.Length);
@@ -49,6 +53,12 @@ namespace ClientClassNamespace
                 }
                 
             });
+
+            _listeningThread.Start();
+        }
+        private void StopListen()
+        {
+            _isLisening = false;
         }
     }
 }

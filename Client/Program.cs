@@ -22,9 +22,9 @@ namespace Client
         //Functions:
         //Connect() v
         //SendMessage() v
-        //StartLisening()
-        // +OnMessageRecived
-        //StopListening()
+        //(priv)StartLisening() v
+        // +OnMessageRecived v
+        //(priv)StopListening() v
         //Disconnect()
         static void Connect(String server, String message)
         {
