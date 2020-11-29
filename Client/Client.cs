@@ -66,7 +66,7 @@ namespace ClientClassNamespace
         public void Disconect()
         {
             StopListen();
-            _listeningThread.Abort();
+            _listeningThread.Interrupt();
             _stream.Close();
             _client.Close();
             
