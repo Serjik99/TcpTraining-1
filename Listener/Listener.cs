@@ -12,5 +12,10 @@ namespace ListenerNamespace
             server = new TcpListener(localAddr, port);
              server.Start();
         }
+
+        private void StartWaitingForConnections()
+        {
+            
+        }
     }
 }
