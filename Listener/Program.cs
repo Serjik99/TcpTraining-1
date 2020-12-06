@@ -7,9 +7,13 @@ namespace Listener
 {
     class Program
     {
+
+        //Functions:
+        //Start()
         static void Main(string[] args)
         {
             #region class Listener part 1
+            #region class Listener Start()
             TcpListener server = null;
             try
             {
@@ -22,11 +26,8 @@ namespace Listener
 
                 // Start listening for client requests.
                 server.Start();
-                
-
-
-                
-               
+                #endregion class Listener Start()
+                #region class Listener StartWaitingForConnections()
 
                 // Enter the listening loop.
                 while (true)
@@ -38,7 +39,10 @@ namespace Listener
                     
                     TcpClient client = server.AcceptTcpClient();
                     Console.WriteLine("Connected!");
+                    #endregion class Listener StartWaitingForConnections()
                     #endregion class Listener part 1
+
+
                     #region class User
                     Thread clientThread = new Thread(() => {
                          // Buffer for reading data
