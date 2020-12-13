@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using ClientClassNamespace;
 
 namespace ListenerNamespace
 {
@@ -50,6 +51,9 @@ namespace ListenerNamespace
 
 
                     #region class User
+                    ClientClass user = new ClientClass("127.0.0.1",13000);
+                    user.Connect();
+
                     Thread clientThread = new Thread(() => {
                          // Buffer for reading data
                         Byte[] bytes = new Byte[256];
