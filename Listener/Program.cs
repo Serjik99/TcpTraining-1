@@ -3,14 +3,20 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
-namespace Listener
+namespace ListenerNamespace
 {
     class Program
     {
+        
+        static void Main()
+        {
+            Listener listener = new Listener();
+            listener.Start();
+        }
 
         //Functions:
         //Start()
-        static void Main(string[] args)
+        static void LastMain(string[] args)
         {
             #region class Listener part 1
             #region class Listener Start()
